@@ -42,16 +42,16 @@ male | Is male. If not, we consider the passenger female. | 0 = No, 1 = Yes
 In this project we aim to create a model with the best possible **Accuracy** to classify if a passenger survives or not the shipwreck.
 For this, we use two approaches:
 
-1) Using AutoML
+1) Using AutoML:
 In this approach, we provide the dataset to AutoML and it automatically does the featurization, try different algorithms and test the performance of many different models. 
 
-2) Using HyperDrive
+2) Using HyperDrive: 
 In this case, we test only a single algorithm and create different models by providing different hyperparameters. The chosen algorithm is Logistic Regression using the framework SKLearn.
 Unlike AutoML, here we need to manually perform feature scaling, normalization and select interesting columns for our model.
 
 In both cases, the best performing model created during runs can be saved and deployed, and its parameters can be checked both in Azure ML portal and in the run logs.
 
-The features that are used in this experiment are the ones described in the data dictionary above. However, in the case of the HyperDrive, we manually remove the columns "Name", "Ticket" and "Cabin", which are strings and have many unique values.
+The features that are used in this experiment are the ones described in the data dictionary above. However, in the case of the HyperDrive, we manually remove the columns "Name", "Ticket" and "Cabin", which are not supported by the Logistic Regression classifier.
 
 ### Access
 *TODO*: Explain how you are accessing the data in your workspace.
