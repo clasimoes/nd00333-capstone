@@ -68,7 +68,7 @@ For that, we can use the `Dataset` class, hwich allows importing tabular data fr
     example_data = 'https://raw.githubusercontent.com/clasimoes/nd00333-capstone/master/titanic_data/full_capstone.csv'
     dataset = Dataset.Tabular.from_delimited_files(example_data)
     #Register Dataset in Workspace
-    dataset = dataset.register(workspace=ws \...)
+    dataset = dataset.register(...)
 ```
 
 
