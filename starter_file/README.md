@@ -123,7 +123,15 @@ Find below the screenshots of the AutoML run details widget, together with the b
 ![automl_run_properties_2](screenshots/automl_run_properties_2.png)
 
 ## Hyperparameter Tuning
-*TODO*: What kind of model did you choose for this experiment and why? Give an overview of the types of parameters and their ranges used for the hyperparameter search
+Here we are using a Logistic Regression model coming from the SKLearn framework to classify if a passenger would survive or not in the Titanic shipwreck.
+Although logistic regression assumes a linear relationship between input and output, which is rarely the real case, it is easy to implement, interpret, and very efficient to train and classify unknown records.
+So, this algorithm has been chosen because it would allow us to experiment quickly in the Azure ML environment.
+
+Hyperdrive is used to sample different values for two algorithm hyperparameters:
+* "C": Inverse of regularization strength
+* "max_iter": Maximum number of iterations taken for the solvers to converge
+
+My choice here was to sample the values using Random Sampling, in which hyperparameter values are randomly selected from the defined search space. "C" is chosen randomly in uniformly distributed between **0.001** and **1.0**, while "max_iter" is sampled from one of the three values: **1000, 10000 and 100000**.
 
 ### Results
 Surprisingly, the best Logistic Regression model in the HyperDrive run performed even better than the best one of the AutoML run. This model had an **accuracy** of **85,20%**.
