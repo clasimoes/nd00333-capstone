@@ -61,7 +61,8 @@ The features that are used in this experiment are the ones described in the data
 The data has been uploaded [this repository](https://github.com/clasimoes/nd00333-capstone/blob/master/titanic_data/full_capstone.csv) for ease.
 In order to access it in our Azure notebooks, we need to download it from an external link into the Azure workspace.
 
-For that, we can use the `Dataset` class, hwich allows importing tabular data from files in the web. With that, we can create and register a dataset in Azure ML Platform.
+For that, we can use the `Dataset` class, which allows importing tabular data from files in the web.
+With that, we become able to create and register a dataset in Azure ML Platform.
 
 ```python
     # Create AML Dataset and register it into Workspace
