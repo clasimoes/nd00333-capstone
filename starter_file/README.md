@@ -3,7 +3,7 @@
 
 In this project, we use the knowledge obtained in **Machine Learning Engineer with Microsoft Azure Nanodegree Program** to solve an interesting problem. 
 
-The problem chosen is the [Kaggle Titanic Challenge](https://www.kaggle.com/c/titanic).  In the famous Titanic shipwreck, some passengers were more likely to survive than others. The dataset from Kaggle platform presents information about 871 passengers and a column that states if they have survived or not. The ultimate goal is to build a model predicts which passengers survived the Titanic shipwreck.
+The problem chosen is the [Kaggle Titanic Challenge](https://www.kaggle.com/c/titanic).  In the famous Titanic shipwreck, some passengers were more likely to survive than others. The dataset from Kaggle platform presents information about 871 passengers and a column that states if they have survived or not. The ultimate goal is to build a model that predicts which passengers survived the Titanic shipwreck.
 
 Here we do this in two different ways:
 1) Using AutoML;
@@ -19,7 +19,7 @@ The dataset chosen for this project is the one from [Kaggle Titanic Challenge](h
 
 In the famous Titanic shipwreck, some passengers were more likely to survive than others. The dataset presents information about 871 passengers and a column that states if they have survived or not.
 
-Here we use only the "training" data of the original challenge because this is the data with "Survived" label, which is necessary for the Supervised Learning algorithms that are used in this project.
+Here we use only the "training" data of the original challenge because this is the data with the "Survived" label, which is necessary for the Supervised Learning algorithms that are used in this project.
 
 Find below the data dictionary:
 
@@ -38,29 +38,29 @@ Q | Port of Embarkation	is Q = Queenstown | 0 = No, 1 = Yes
 S | Port of Embarkation	is S = Southampton | 0 = No, 1 = Yes
 male | Is male. If not, we consider the passenger female. | 0 = No, 1 = Yes
 
-The data has been uploaded [this repository](https://github.com/clasimoes/nd00333-capstone/blob/master/titanic_data/full_capstone.csv) for ease.
+The data has been uploaded to [this repository](https://github.com/clasimoes/nd00333-capstone/blob/master/titanic_data/full_capstone.csv) for ease.
 
 ### Task
-In this project we aim to create a model with the best possible **Accuracy** to classify if a passenger survives or not the shipwreck.
+In this project, we aim to create a model with the best possible **Accuracy** to classify if a passenger survives or not the shipwreck.
 For this, we use two approaches:
 
 1) **Using AutoML**:
-In this approach, we provide the dataset to AutoML and it automatically does the featurization, try different algorithms and test the performance of many different models. 
+In this approach, we provide the dataset to AutoML and it automatically does the featurization, tries different algorithms, and test the performance of many different models. 
 
 2) **Using HyperDrive**: 
 In this case, we test only a single algorithm and create different models by providing different hyperparameters. The chosen algorithm is Logistic Regression using the framework SKLearn.
 Unlike AutoML, here we need to manually perform feature scaling, normalization and select interesting columns for our model.
 
-In both cases, the best performing model created during runs can be saved and deployed, and its parameters can be checked both in Azure ML portal and in the run logs.
+In both cases, the best performing model created during runs can be saved and deployed, and its parameters can be checked both in the Azure ML portal and in the run logs.
 
-The features that are used in this experiment are the ones described in the data dictionary above. However, in the case of the HyperDrive, we manually remove the columns "Name", "Ticket" and "Cabin", which are not supported by the Logistic Regression classifier.
+The features that are used in this experiment are the ones described in the data dictionary above. However, in the case of the HyperDrive, we manually remove the columns "Name", "Ticket", and "Cabin" which are not supported by the Logistic Regression classifier.
 
 ### Access
 
-The data has been uploaded [this repository](https://github.com/clasimoes/nd00333-capstone/blob/master/titanic_data/full_capstone.csv) for ease.
-In order to access it in our Azure notebooks, we need to download it from an external link into the Azure workspace.
+The data has been uploaded to [this repository](https://github.com/clasimoes/nd00333-capstone/blob/master/titanic_data/full_capstone.csv) for ease.
+To access it in our Azure notebooks, we need to download it from an external link into the Azure workspace.
 
-For that, we can use the `Dataset` class, which allows importing tabular data from files in the web.
+For that, we can use the `Dataset` class, which allows importing tabular data from files on the web.
 With that, we become able to create and register a dataset in Azure ML Platform and convert it to a Pandas Dataframe.
 
 ```python
@@ -73,8 +73,8 @@ With that, we become able to create and register a dataset in Azure ML Platform 
 
 
 ## Automated ML
-For the AutoML run, first we create a compute cluster to run the experiment. In this cluster, we provise 2-10 machines with the **"STANDARD_DS12_V2"** configuration.
-Because we have 10 nodes in our cluster, we are able to run up to 9 concurrent iterations in our experiment (1 node is meant to be used by the "parent" experiment).
+For the AutoML run, first we create a compute cluster to run the experiment. In this cluster, we provide 2 to 10 machines with the **"STANDARD_DS12_V2"** configuration.
+Because we have 10 nodes in our cluster, we can run up to 9 concurrent iterations in our experiment (1 node is meant to be used by the "parent" experiment).
 
 The constructor of `AutoMLConfig` class takes the following parameters:
 * `compute_target`: cluster where the experiment jobs will run;
@@ -108,7 +108,7 @@ The parameters used by this classifier are the following:
 * tree_method='auto'
 
 To improve the AutoML algorithm even further, we could choose the best 3 to 5 algorithms that performed well in this classification task and create another AutoML run forbidding any other type of algorithm.
-We could also take a look in the data that has been wrongly classified by the best model and try to idenficate a pattern that points to transformations that we can perform in the dataset. This could be done by creating a pipeline with a first step to transform the data and second one to execute the AutoML.
+We could also take a look at the data that has been wrongly classified by the best model and try to identify a pattern that points to transformations that we can perform in the dataset. This could be done by creating a pipeline with a first step to transform the data and a second one to execute the AutoML.
 
 Find below the screenshots of the AutoML run details widget, together with the best run details in the Azure ML platform and its properties in the Jupyter notebook.
 
@@ -131,17 +131,17 @@ Hyperdrive is used to sample different values for two algorithm hyperparameters:
 * "C": Inverse of regularization strength
 * "max_iter": Maximum number of iterations taken for the solvers to converge
 
-My choice here was to sample the values using Random Sampling, in which hyperparameter values are randomly selected from the defined search space. "C" is chosen randomly in uniformly distributed between **0.001** and **1.0**, while "max_iter" is sampled from one of the three values: **1000, 10000 and 100000**.
+My choice here was to sample the values using Random Sampling, in which hyperparameter values are randomly selected from the defined search space. "C" is chosen randomly in uniformly distributed between **0.001** and **1.0**, while "max_iter" is sampled from one of the three values: **1000, 10000, and 100000**.
 
 ### Results
-Surprisingly, the best Logistic Regression model in the HyperDrive run performed even better than the best one of the AutoML run. This model had an **accuracy** of **85,20%**.
+Surprisingly, the best Logistic Regression model in the HyperDrive run performed even better than the best one in the AutoML run. This model had an **accuracy** of **85,20%**.
 
 The parameters used by this classifier are the following:
 * C = 0.8893892118773127
 * Max iterations = 1000
 
-To improve the Hyperdrive algorithm even further, we could have used regularization strenght as reference (it was randomly picked) and created a second HyperDrive run using a different sampling method using values closer to it.
-Another strategy would be to test different classifier algorithms in our training script, and change their hyperparameters too. We could do that to a finite set of algorithms and hyperparameters and select the best one among all runs.
+To improve the Hyperdrive algorithm even further, we could have used regularization strength as a reference (it was randomly picked) and created a second HyperDrive run using a different sampling method using values closer to it.
+Another strategy would be to test different classifier algorithms in our training script and change their hyperparameters too. We could do that to a finite set of algorithms and hyperparameters and select the best one among all runs.
 
 #### HyperDrive Run Details widget
 ![hyperdrive_run_details](screenshots/hyperdrive_run_details.png)
@@ -156,7 +156,7 @@ Another strategy would be to test different classifier algorithms in our trainin
 The model created by the HyperDrive has been deployed in an endpoint that can be accessed using the following REST API:
 `http://01b44a8b-d762-47c0-af37-16bc6cdf52aa.southcentralus.azurecontainer.io/score`
 
-The expected input type consists in a json with the following format:
+The expected input type consists of a JSON with the following format:
 ```json
 "data":
         [
@@ -174,7 +174,8 @@ The expected input type consists in a json with the following format:
         ]
 ```
 
-To query it with a simple input, the anyone can mock the following python code:
+To query it using a simple input, anyone can mock the following python code:
+
 ```python
 import requests
 import json
