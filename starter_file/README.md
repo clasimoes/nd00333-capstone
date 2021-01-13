@@ -126,9 +126,15 @@ Find below the screenshots of the AutoML run details widget, together with the b
 *TODO*: What kind of model did you choose for this experiment and why? Give an overview of the types of parameters and their ranges used for the hyperparameter search
 
 ### Results
-*TODO*: What are the results you got with your model? What were the parameters of the model? How could you have improved it?
+Surprisingly, the best Logistic Regression model in the HyperDrive run performed even better than the best one of the AutoML run. This model had an **accuracy** of **85,20%**.
 
-*TODO* Remeber to provide screenshots of the `RunDetails` widget as well as a screenshot of the best model trained with it's parameters.
+The parameters used by this classifier are the following:
+* Regularization Strength ("C") = 0.8893892118773127
+* Max iterations = 1000
+
+To improve the Hyperdrive algorithm even further, we could have used regularization strenght as reference (it was randomly picked) and created a second HyperDrive run using a different sampling method using values closer to it.
+Another strategy would be to test different classifier algorithms in our training script, and change their hyperparameters too. We could do that to a finite set of algorithms and hyperparameters and select the best one among all runs.
+
 #### HyperDrive Run Details widget
 ![hyperdrive_run_details](screenshots/hyperdrive_run_details.png)
 
