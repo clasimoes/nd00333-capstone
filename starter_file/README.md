@@ -1,4 +1,4 @@
-# Capstone - Azure Machine Learning Engineer
+# Capstone Project - Azure Machine Learning Engineer Nanodegree
 ### Clarisse Ribeiro
 
 In this project, we use the knowledge obtained in **Machine Learning Engineer with Microsoft Azure Nanodegree Program** to solve an interesting problem. 
