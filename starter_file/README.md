@@ -56,7 +56,6 @@ In both cases, the best performing model created during runs can be saved and de
 The features that are used in this experiment are the ones described in the data dictionary above. However, in the case of the HyperDrive, we manually remove the columns "Name", "Ticket" and "Cabin", which are not supported by the Logistic Regression classifier.
 
 ### Access
-*TODO*: Explain how you are accessing the data in your workspace.
 
 The data has been uploaded [this repository](https://github.com/clasimoes/nd00333-capstone/blob/master/titanic_data/full_capstone.csv) for ease.
 In order to access it in our Azure notebooks, we need to download it from an external link into the Azure workspace.
