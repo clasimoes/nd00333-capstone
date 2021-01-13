@@ -27,25 +27,27 @@ Variable | Definition | Key
 ------------ | ------------- | -------------
 Survived | Survival | 0 = No, 1 = Yes
 Nclass | Ticket class | 1 = 1st, 2 = 2nd, 3 = 3rd
-Name | Name | name of the passenger
+Name | Name | name of the passenger (string)
 Age	| Age | in years
 Pibsp | # of siblings / spouses aboard the Titanic	| 
 Parch | # of parents / children aboard the Titanic	| 
-Ticket | Ticket number	|
-Fare | Passenger fare | 
-Cabin | Cabin number | 
+Ticket | Ticket number	| string
+Fare | Passenger fare | Value (float)
+Cabin | Cabin number |  string
 Q | Port of Embarkation	is Q = Queenstown | 0 = No, 1 = Yes
 S | Port of Embarkation	is S = Southampton | 0 = No, 1 = Yes
 male | Is male. If not, we consider the passenger female. | 0 = No, 1 = Yes
+
+The data has been uploaded [this repository](https://github.com/clasimoes/nd00333-capstone/blob/master/titanic_data/full_capstone.csv) for ease.
 
 ### Task
 In this project we aim to create a model with the best possible **Accuracy** to classify if a passenger survives or not the shipwreck.
 For this, we use two approaches:
 
-1) Using AutoML:
+1) **Using AutoML**:
 In this approach, we provide the dataset to AutoML and it automatically does the featurization, try different algorithms and test the performance of many different models. 
 
-2) Using HyperDrive: 
+2) **Using HyperDrive**: 
 In this case, we test only a single algorithm and create different models by providing different hyperparameters. The chosen algorithm is Logistic Regression using the framework SKLearn.
 Unlike AutoML, here we need to manually perform feature scaling, normalization and select interesting columns for our model.
 
