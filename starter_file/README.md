@@ -58,6 +58,20 @@ The features that are used in this experiment are the ones described in the data
 ### Access
 *TODO*: Explain how you are accessing the data in your workspace.
 
+The data has been uploaded [this repository](https://github.com/clasimoes/nd00333-capstone/blob/master/titanic_data/full_capstone.csv) for ease.
+In order to access it in our Azure notebooks, we need to download it from an external link into the Azure workspace.
+
+For that, we can use the `Dataset` class, hwich allows importing tabular data from files in the web. With that, we can create and register a dataset in Azure ML Platform.
+
+```python
+    # Create AML Dataset and register it into Workspace
+    example_data = 'https://raw.githubusercontent.com/clasimoes/nd00333-capstone/master/titanic_data/full_capstone.csv'
+    dataset = Dataset.Tabular.from_delimited_files(example_data)
+    #Register Dataset in Workspace
+    dataset = dataset.register(workspace=ws \...)
+```
+
+
 ## Automated ML
 *TODO*: Give an overview of the `automl` settings and configuration you used for this experiment
 
