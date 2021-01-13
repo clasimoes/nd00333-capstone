@@ -19,6 +19,10 @@ The dataset chosen for this project is the one from [Kaggle Titanic Challenge](h
 
 In the famous Titanic shipwreck, some passengers were more likely to survive than others. The dataset presents information about 871 passengers and a column that states if they have survived or not.
 
+Here we use only the "training" data of the original challenge because this is the data with "Survived" label, which is necessary for the Supervised Learning algorithms that are used in this project.
+
+Find below the data dictionary:
+
 Variable | Definition | Key
 ------------ | ------------- | -------------
 Survived | Survival | 0 = No, 1 = Yes
@@ -26,16 +30,28 @@ Nclass | Ticket class | 1 = 1st, 2 = 2nd, 3 = 3rd
 Name | Name | name of the passenger
 Age	| Age | in years
 Pibsp | # of siblings / spouses aboard the Titanic	| 
-Parch	# of parents / children aboard the Titanic	| 
+Parch | # of parents / children aboard the Titanic	| 
 Ticket | Ticket number	|
 Fare | Passenger fare | 
 Cabin | Cabin number | 
 Q | Port of Embarkation	is Q = Queenstown | 0 = No, 1 = Yes
 S | Port of Embarkation	is S = Southampton | 0 = No, 1 = Yes
-male | Is male. If not, we consider female. | 0 = No, 1 = Yes
+male | Is male. If not, we consider the passenger female. | 0 = No, 1 = Yes
 
 ### Task
-*TODO*: Explain the task you are going to be solving with this dataset and the features you will be using for it.
+In this project we aim to create a model with the best possible **Accuracy** to classify if a passenger survives or not the shipwreck.
+For this, we use two approaches:
+
+1) Using AutoML
+In this approach, we provide the dataset to AutoML and it automatically does the featurization, try different algorithms and test the performance of many different models. 
+
+2) Using HyperDrive
+In this case, we test only a single algorithm and create different models by providing different hyperparameters. The chosen algorithm is Logistic Regression using the framework SKLearn.
+Unlike AutoML, here we need to manually perform feature scaling, normalization and select interesting columns for our model.
+
+In both cases, the best performing model created during runs can be saved and deployed, and its parameters can be checked both in Azure ML portal and in the run logs.
+
+The features that are used in this experiment are the ones described in the data dictionary above. However, in the case of the HyperDrive, we manually remove the columns "Name", "Ticket" and "Cabin", which are strings and have many unique values.
 
 ### Access
 *TODO*: Explain how you are accessing the data in your workspace.
