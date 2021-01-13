@@ -137,7 +137,7 @@ My choice here was to sample the values using Random Sampling, in which hyperpar
 Surprisingly, the best Logistic Regression model in the HyperDrive run performed even better than the best one of the AutoML run. This model had an **accuracy** of **85,20%**.
 
 The parameters used by this classifier are the following:
-* Regularization Strength ("C") = 0.8893892118773127
+* C = 0.8893892118773127
 * Max iterations = 1000
 
 To improve the Hyperdrive algorithm even further, we could have used regularization strenght as reference (it was randomly picked) and created a second HyperDrive run using a different sampling method using values closer to it.
