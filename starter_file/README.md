@@ -61,7 +61,7 @@ The data has been uploaded [this repository](https://github.com/clasimoes/nd0033
 In order to access it in our Azure notebooks, we need to download it from an external link into the Azure workspace.
 
 For that, we can use the `Dataset` class, which allows importing tabular data from files in the web.
-With that, we become able to create and register a dataset in Azure ML Platform.
+With that, we become able to create and register a dataset in Azure ML Platform and convert it to a Pandas Dataframe.
 
 ```python
     # Create AML Dataset and register it into Workspace
@@ -74,6 +74,24 @@ With that, we become able to create and register a dataset in Azure ML Platform.
 
 ## Automated ML
 *TODO*: Give an overview of the `automl` settings and configuration you used for this experiment
+
+For the AutoML run, first we create a compute cluster to run the experiment. In this cluster, we provise 2-10 machines with the "STANDARD_DS12_V2" configuration.
+Because we have 10 nodes in our cluster, we are able to run up to 9 concurrent iterations in our experiment (1 node is meant to be used by the "parent" experiment).
+
+The constructor of `AutoMLConfig` class takes the following parameters:
+* `compute_target`: cluster where the experiment jobs will run;
+* `task`: type of ML problem to solve, set as `classification`;
+* `experiment_timeout_minutes`: 20;
+* `training_data`: the dataset loaded; 
+* `label_column_name`: The column that should be predicted, which is the "Survived" one; 
+* `path`: the full path to the Azure Machine Learning project folder; 
+* `enable_early_stopping`: the dataset loaded; 
+* `featurization`: indicator that featurization step should be done automatically;
+* `debug_log`: The log file to write debug information to; 
+* `automl_settings`: other settings passed as a dictionary. 
+    * `max_concurrent_iterations`: Represents the maximum number of iterations that would be executed in parallel. Set to 9;
+    * `primary_metric`: The metric that Automated Machine Learning will optimize for model selection. We chose to optimize for `Accuracy`.
+
 
 ### Results
 *TODO*: What are the results you got with your automated ML model? What were the parameters of the model? How could you have improved it?
