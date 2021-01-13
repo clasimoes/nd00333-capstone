@@ -129,6 +129,14 @@ Find below the screenshots of the AutoML run details widget, together with the b
 *TODO*: What are the results you got with your model? What were the parameters of the model? How could you have improved it?
 
 *TODO* Remeber to provide screenshots of the `RunDetails` widget as well as a screenshot of the best model trained with it's parameters.
+#### HyperDrive Run Details widget
+![hyperdrive_run_details](screenshots/hyperdrive_run_details.png)
+
+#### HyperDrive Best Model Run
+![hyperdrive_best_run_graph](screenshots/hyperdrive_best_run_graph.png)
+
+#### HyperDrive Best Model Run Properties
+![hyperdrive_best_run_parameters](screenshots/hyperdrive_best_run_parameters.png)
 
 ## Model Deployment
 *TODO*: Give an overview of the deployed model and instructions on how to query the endpoint with a sample input.
