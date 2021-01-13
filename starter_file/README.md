@@ -92,21 +92,19 @@ The constructor of `AutoMLConfig` class takes the following parameters:
 
 
 ### Results
-*TODO*: What are the results you got with your automated ML model? What were the parameters of the model? How could you have improved it?
-
 Among 100 experiments included in the AutoML, the best model produced relied on the **Voting Ensemble** algorithm, from the SKLearn framework. This model had an **accuracy** of **83,84%**.
 The parameters used by this classifier are the following:
 
 * n_jobs=1
 * nthread=None
 * objective='reg:logistic'
-* random_state=0,
+* random_state=0
 * reg_alpha=1.6666666666666667
 * reg_lambda=1.4583333333333335
 * scale_pos_weight=1
-* seed=None,
-* silent=None,
-* subsample=1,
+* seed=None
+* silent=None
+* subsample=1
 * tree_method='auto'
 
 To improve the AutoML algorithm even further, we could choose the best 3 to 5 algorithms that performed well in this classification task and create another AutoML run forbidding any other type of algorithm.
