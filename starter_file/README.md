@@ -6,8 +6,8 @@ In this project, we use the knowledge obtained in **Machine Learning Engineer wi
 The problem chosen is the [Kaggle Titanic Challenge](https://www.kaggle.com/c/titanic).  In the famous Titanic shipwreck, some passengers were more likely to survive than others. The dataset from Kaggle platform presents information about 871 passengers and a column that states if they have survived or not. The ultimate goal is to build a model predicts which passengers survived the Titanic shipwreck.
 
 Here we do this in two different ways:
-1) using AutoML;
-2) Using a customized Logistic Regression model from SKLearn framework whose hyperparameters are tuned using HyperDrive
+1) Using AutoML;
+2) Using a customized model and tuning its hyperparameters with HyperDrive
 
 We then compare the performance of both the models and deploy the best performing model.
 
