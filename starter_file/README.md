@@ -73,9 +73,7 @@ With that, we become able to create and register a dataset in Azure ML Platform 
 
 
 ## Automated ML
-*TODO*: Give an overview of the `automl` settings and configuration you used for this experiment
-
-For the AutoML run, first we create a compute cluster to run the experiment. In this cluster, we provise 2-10 machines with the "STANDARD_DS12_V2" configuration.
+For the AutoML run, first we create a compute cluster to run the experiment. In this cluster, we provise 2-10 machines with the **"STANDARD_DS12_V2"** configuration.
 Because we have 10 nodes in our cluster, we are able to run up to 9 concurrent iterations in our experiment (1 node is meant to be used by the "parent" experiment).
 
 The constructor of `AutoMLConfig` class takes the following parameters:
