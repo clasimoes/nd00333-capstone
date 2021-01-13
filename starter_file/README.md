@@ -97,7 +97,7 @@ The constructor of `AutoMLConfig` class takes the following parameters:
 *TODO* Remeber to provide screenshots of the `RunDetails` widget as well as a screenshot of the best model trained with it's parameters.
 
 #### AutoML Run Details widget
-![automl_run_details_widget](screenshot/automl_run_details.png)
+![automl_run_details_widget](screenshots/automl_run_details.png)
 
 ## Hyperparameter Tuning
 *TODO*: What kind of model did you choose for this experiment and why? Give an overview of the types of parameters and their ranges used for the hyperparameter search
