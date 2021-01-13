@@ -153,7 +153,61 @@ Another strategy would be to test different classifier algorithms in our trainin
 ![hyperdrive_best_run_parameters](screenshots/hyperdrive_best_run_parameters.png)
 
 ## Model Deployment
-*TODO*: Give an overview of the deployed model and instructions on how to query the endpoint with a sample input.
+The model created by the HyperDrive has been deployed in an endpoint that can be accessed using the following REST API:
+`http://01b44a8b-d762-47c0-af37-16bc6cdf52aa.southcentralus.azurecontainer.io/score`
+
+The expected input type consists in a json with the following format:
+```json
+"data":
+        [
+          {
+            "PassengerId": integer,
+            "Pclass": integer,
+            "Age": float,
+            "SibSp": integer,
+            "Parch": integer, 
+            "Fare": float,
+            "Q": integer,
+            "S": integer,
+            "male": integer
+          }
+        ]
+```
+
+To query it with a simple input, the anyone can mock the following python code:
+```python
+import requests
+import json
+
+scoring_uri = 'http://01b44a8b-d762-47c0-af37-16bc6cdf52aa.southcentralus.azurecontainer.io/score'
+
+data = {"data":
+        [
+          {
+            "PassengerId": 812,
+            "Pclass": 2,
+            "Age": 23.0,
+            "SibSp": 0,
+            "Parch": 0, 
+            "Fare": 13.0,
+            "Q": 0,
+            "S": 1,
+            "male": 1
+          }
+        ]
+       }
+
+# Convert to JSON string
+input_data = json.dumps(data)
+# Set the content type
+headers = {'Content-Type': 'application/json'}
+# Make the request and display the response
+resp = requests.post(scoring_uri, input_data, headers=headers)
+print(resp.json())
+```
+
+#### Service of HyperDrive model with "Active" deployment state
+![hyperdrive_service_active](screenshots/hyperdrive_service_active.png)
 
 ## Screen Recording
 https://drive.google.com/file/d/1-DRqQ1hwh7izFWY5uOYBsdrsliRKAMXF/view?usp=sharing
