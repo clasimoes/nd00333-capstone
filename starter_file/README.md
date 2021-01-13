@@ -99,6 +99,13 @@ The constructor of `AutoMLConfig` class takes the following parameters:
 #### AutoML Run Details widget
 ![automl_run_details_widget](screenshots/automl_run_details.png)
 
+#### AutoML Best Model Run
+![automl_run_web_gui](screenshots/automl_run.png)
+
+#### AutoML Best Model Run Properties
+![automl_run_properties_1](screenshots/automl_run_properties_1.png)
+![automl_run_properties_1](screenshots/automl_run_properties_2.png)
+
 ## Hyperparameter Tuning
 *TODO*: What kind of model did you choose for this experiment and why? Give an overview of the types of parameters and their ranges used for the hyperparameter search
 
