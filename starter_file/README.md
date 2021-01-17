@@ -120,23 +120,33 @@ Because AutoML is an automated process that might take a long time to use many r
 Featurization enables techniques of feature engineering to be applied to the dataset, enhancing the learning process. Examples of featurization steps are imputing missing values, generation of more features, dropping features with no variance, among others. `Data guardrails` is a feature that helps to identify automatically potential issues with the data, like missing values or class imbalance. Setting the `featurization` option to `auto` specifies that, as part of preprocessing, data guardrails and featurization steps are to be done automatically.
 
 ### Results
-Among 100 experiments included in the AutoML, the best model produced relied on the **Voting Ensemble** algorithm, from the SKLearn framework. This model had an **accuracy** of **83,84%**.
+Among 100 experiments included in the AutoML, the best model produced relied on the **Voting Ensemble** algorithm, from the SKLearn framework. This model had an **accuracy** of **83,39%**.
 
-Voting Ensemble uses multiple models as inner estimators and each one has its own unique hyperparameters
+Voting Ensemble uses multiple models as inner estimators and each one has its unique hyperparameters.
+I've chose one of the estimators used by the best model to display the parameters used by it here. The classifier is a **Light GBM** algorithm with the following parameters:
 
-The parameters used by this classifier are the following:
-
-* n_jobs=1
-* nthread=None
-* objective='reg:logistic'
-* random_state=0
-* reg_alpha=1.6666666666666667
-* reg_lambda=1.4583333333333335
-* scale_pos_weight=1
-* seed=None
-* silent=None
-* subsample=1
-* tree_method='auto'
+* `boosting_type`: 'gbdt'
+* `class_weight`: None
+* `importance_type`: 'split'
+* `learning_rate`: 0.1
+* `max_depth`: -1
+* `colsample_bytree`: 1.0
+* `colsample_bytree`: 1.0
+* `min_child_samples`: 20
+* `min_child_weight`: 0.001
+* `min_split_gain`: 0.0
+* `n_estimators`: 100
+* `n_jobs`: 1
+* `num_leaves`: 31
+* `objective`: None
+* `random_state`: None
+* `reg_alpha`: 0.0
+* `reg_lambda`: 0.0
+* `silent`: True
+* `subsample`: 1.0
+* `subsample_for_bin`: 200000
+* `subsample_freq`: 0
+* `verbose`: -10
 
 Find below the screenshots of the AutoML run details widget, together with the best run details in the Azure ML platform and its properties in the Jupyter notebook.
 
