@@ -1,15 +1,38 @@
+- [Capstone Project - Azure Machine Learning Engineer Nanodegree](#capstone-project---azure-machine-learning-engineer-nanodegree)
+    - [Clarisse Ribeiro](#clarisse-ribeiro)
+  - [Dataset](#dataset)
+    - [Overview](#overview)
+    - [Task](#task)
+    - [Access](#access)
+  - [Automated ML](#automated-ml)
+    - [Results](#results)
+      - [AutoML Run Details widget](#automl-run-details-widget)
+      - [AutoML Best Model Run](#automl-best-model-run)
+      - [AutoML Best Model Run Properties](#automl-best-model-run-properties)
+  - [Hyperparameter Tuning](#hyperparameter-tuning)
+    - [Results](#results-1)
+      - [HyperDrive Run Details widget](#hyperdrive-run-details-widget)
+      - [HyperDrive Best Model Run](#hyperdrive-best-model-run)
+      - [HyperDrive Best Model Run Properties](#hyperdrive-best-model-run-properties)
+  - [Model Deployment](#model-deployment)
+      - [Service of HyperDrive model with "Active" deployment state](#service-of-hyperdrive-model-with-active-deployment-state)
+  - [Future improvements](#future-improvements)
+  - [Screen Recording](#screen-recording)
+
 # Capstone Project - Azure Machine Learning Engineer Nanodegree
-### Clarisse Ribeiro
+### [Clarisse Ribeiro](https://www.linkedin.com/in/clarisse-simoes-ribeiro/)
+
 
 In this project, we use the knowledge obtained in **Machine Learning Engineer with Microsoft Azure Nanodegree Program** to solve an interesting problem. 
 
-The problem chosen is the [Kaggle Titanic Challenge](https://www.kaggle.com/c/titanic).  In the famous Titanic shipwreck, some passengers were more likely to survive than others. The dataset from Kaggle platform presents information about 871 passengers and a column that states if they have survived or not. The ultimate goal is to build a model that predicts which passengers survived the Titanic shipwreck.
+The problem chosen is the [Kaggle Titanic Challenge](https://www.kaggle.com/c/titanic).  In the famous Titanic shipwreck, some passengers were more likely to survive than others. The dataset from Kaggle platform presents information about 871 passengers and a column that states if they have survived or not. The ultimate goal is to build a model that predicts which passengers survived the Titanic shipwreck. The Titanic Dataset is commonly referred to as the "hello world" of data science.
 
 Here we do this in two different ways:
 1) Using AutoML;
 2) Using a customized model and tuning its hyperparameters with HyperDrive
 
 We then compare the performance of both the models and deploy the best performing model.
+The deployment is done using the Azure Python SDK, and creates an endpoint that can be accessed through an HTTP REST API. The step makes it possible for any new data to be evaluated by the best model thorugh the service.
 
 ## Dataset
 
@@ -83,16 +106,24 @@ The constructor of `AutoMLConfig` class takes the following parameters:
 * `training_data`: the dataset loaded; 
 * `label_column_name`: The column that should be predicted, which is the "Survived" one; 
 * `path`: the full path to the Azure Machine Learning project folder; 
-* `enable_early_stopping`: the dataset loaded; 
+* `enable_early_stopping`: makes it possible for the AutoML to stop jobs that are not performing well after a minimum number of iterations; 
 * `featurization`: indicator that featurization step should be done automatically;
 * `debug_log`: The log file to write debug information to; 
 * `automl_settings`: other settings passed as a dictionary. 
     * `max_concurrent_iterations`: Represents the maximum number of iterations that would be executed in parallel. Set to 9;
     * `primary_metric`: The metric that Automated Machine Learning will optimize for model selection. We chose to optimize for `Accuracy`.
 
+The `accuracy` metric might be misleading when the training data has very few samples of one of the classes, which is **not** the case in Titanic dataset. The distribution of classes on it is about 40% and 60% of samples in each class. Moreover, accuracy is a straightforward metric and easy to understand. This is the main reason why it has been chosen in this experiment.
+
+Because AutoML is an automated process that might take a long time to use many resources, it is a good idea to enable the early stopping of model training jobs. When the training takes a long time, it can lead to higher costs. The tool is then able to kill jobs that are not performing well, leading to better resource usage
+
+Featurization enables techniques of feature engineering to be applied to the dataset, enhancing the learning process. Examples of featurization steps are imputing missing values, generation of more features, dropping features with no variance, among others. `Data guardrails` is a feature that helps to identify automatically potential issues with the data, like missing values or class imbalance. Setting the `featurization` option to `auto` specifies that, as part of preprocessing, data guardrails and featurization steps are to be done automatically.
 
 ### Results
 Among 100 experiments included in the AutoML, the best model produced relied on the **Voting Ensemble** algorithm, from the SKLearn framework. This model had an **accuracy** of **83,84%**.
+
+Voting Ensemble uses multiple models as inner estimators and each one has its own unique hyperparameters
+
 The parameters used by this classifier are the following:
 
 * n_jobs=1
@@ -106,9 +137,6 @@ The parameters used by this classifier are the following:
 * silent=None
 * subsample=1
 * tree_method='auto'
-
-To improve the AutoML algorithm even further, we could choose the best 3 to 5 algorithms that performed well in this classification task and create another AutoML run forbidding any other type of algorithm.
-We could also take a look at the data that has been wrongly classified by the best model and try to identify a pattern that points to transformations that we can perform in the dataset. This could be done by creating a pipeline with a first step to transform the data and a second one to execute the AutoML.
 
 Find below the screenshots of the AutoML run details widget, together with the best run details in the Azure ML platform and its properties in the Jupyter notebook.
 
@@ -128,10 +156,10 @@ Although logistic regression assumes a linear relationship between input and out
 So, this algorithm has been chosen because it would allow us to experiment quickly in the Azure ML environment.
 
 Hyperdrive is used to sample different values for two algorithm hyperparameters:
-* "C": Inverse of regularization strength
-* "max_iter": Maximum number of iterations taken for the solvers to converge
+* `C`: Inverse of regularization strength
+* `max_iter`: Maximum number of iterations taken for the solvers to converge
 
-My choice here was to sample the values using Random Sampling, in which hyperparameter values are randomly selected from the defined search space. "C" is chosen randomly in uniformly distributed between **0.001** and **1.0**, while "max_iter" is sampled from one of the three values: **1000, 10000, and 100000**.
+My choice here was to sample the values using Random Sampling, in which hyperparameter values are randomly selected from the defined search space. `C` is chosen randomly in uniformly distributed between **0.001** and **1.0**, while `max_iter` is sampled from one of the three values: **1000, 10000, and 100000**.
 
 ### Results
 Surprisingly, the best Logistic Regression model in the HyperDrive run performed even better than the best one in the AutoML run. This model had an **accuracy** of **85,20%**.
@@ -139,9 +167,6 @@ Surprisingly, the best Logistic Regression model in the HyperDrive run performed
 The parameters used by this classifier are the following:
 * C = 0.8893892118773127
 * Max iterations = 1000
-
-To improve the Hyperdrive algorithm even further, we could have used regularization strength as a reference (it was randomly picked) and created a second HyperDrive run using a different sampling method using values closer to it.
-Another strategy would be to test different classifier algorithms in our training script and change their hyperparameters too. We could do that to a finite set of algorithms and hyperparameters and select the best one among all runs.
 
 #### HyperDrive Run Details widget
 ![hyperdrive_run_details](screenshots/hyperdrive_run_details.png)
@@ -154,7 +179,7 @@ Another strategy would be to test different classifier algorithms in our trainin
 
 ## Model Deployment
 The model created by the HyperDrive has been deployed in an endpoint that can be accessed using the following REST API:
-`http://01b44a8b-d762-47c0-af37-16bc6cdf52aa.southcentralus.azurecontainer.io/score`
+`http://XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX.southcentralus.azurecontainer.io/score`
 
 The expected input type consists of a JSON with the following format:
 ```json
@@ -209,6 +234,17 @@ print(resp.json())
 
 #### Service of HyperDrive model with "Active" deployment state
 ![hyperdrive_service_active](screenshots/hyperdrive_service_active.png)
+
+## Future improvements
+
+There are many ways to improve AutoML and HyperDrive runs in this project.
+
+To improve the AutoML, we could choose the best 3 to 5 algorithms that performed well in this classification task and create another AutoML run forbidding any other algorithm type. We could also take a look at the data that has been wrongly classified by the best model and try to identify a pattern that points to transformations that we can perform in the dataset. That can be done by creating a pipeline with a first step to transform the data and a second one to execute the AutoML.
+
+Moving on to the HyperDrive algorithm, we could have used regularization strength as a reference (it was randomly picked) and created a second HyperDrive run using a different sampling method using values closer to it.
+Another strategy would be to test different classifier algorithms in our training script and change their hyperparameters too. We could do that to a finite set of algorithms and hyperparameters and select the best one among all runs. Many other classification algorithms could be tested, like Decision Tree, Random Forest, Support Vector Classification, and so on. Each of these algorithms has different hyperparameters that can be choose using either Random Sampling or other sampling methods. Deep Learning algorithms could also be applied to solve this problem.
+
+Going even further, models performance was measured using the metric `Accuracy` for simplicity, and this could be changed to a more robust metric like `AUC_weighted` for example.
 
 ## Screen Recording
 https://drive.google.com/file/d/1-DRqQ1hwh7izFWY5uOYBsdrsliRKAMXF/view?usp=sharing
