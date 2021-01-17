@@ -15,6 +15,7 @@ from azureml.core.run import Run
 from azureml.data.datapath import DataPath
 from azureml.data.dataset_factory import TabularDatasetFactory
 
+
 def main():
     # Get run context
     run = Run.get_context()
