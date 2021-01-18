@@ -17,7 +17,6 @@
   - [Model Deployment](#model-deployment)
       - [Service of HyperDrive model with "Active" deployment state](#service-of-hyperdrive-model-with-active-deployment-state)
   - [Future improvements](#future-improvements)
-  - [Screen Recording](#screen-recording)
 
 # Capstone Project - Azure Machine Learning Engineer Nanodegree
 ### [Clarisse Ribeiro](https://www.linkedin.com/in/clarisse-simoes-ribeiro/)
@@ -255,6 +254,3 @@ Moving on to the HyperDrive algorithm, we could have used regularization strengt
 Another strategy would be to test different classifier algorithms in our training script and change their hyperparameters too. We could do that to a finite set of algorithms and hyperparameters and select the best one among all runs. Many other classification algorithms could be tested, like Decision Tree, Random Forest, Support Vector Classification, and so on. Each of these algorithms has different hyperparameters that can be choose using either Random Sampling or other sampling methods. Deep Learning algorithms could also be applied to solve this problem.
 
 Going even further, models performance was measured using the metric `Accuracy` for simplicity, and this could be changed to a more robust metric like `AUC_weighted` for example.
-
-## Screen Recording
-https://drive.google.com/file/d/1-DRqQ1hwh7izFWY5uOYBsdrsliRKAMXF/view?usp=sharing
