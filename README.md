@@ -150,14 +150,14 @@ I've chose one of the estimators used by the best model to display the parameter
 Find below the screenshots of the AutoML run details widget, together with the best run details in the Azure ML platform and its properties in the Jupyter notebook.
 
 #### AutoML Run Details widget
-![automl_run_details_widget](screenshots/automl_run_details.png)
+![automl_run_details_widget](starter_file/screenshots/automl_run_details.png)
 
 #### AutoML Best Model Run
-![automl_run_web_gui](screenshots/automl_run.png)
+![automl_run_web_gui](starter_file/screenshots/automl_run.png)
 
 #### AutoML Best Model Run Properties
-![automl_run_properties_1](screenshots/automl_run_properties_1.png)
-![automl_run_properties_2](screenshots/automl_run_properties_2.png)
+![automl_run_properties_1](starter_file/screenshots/automl_run_properties_1.png)
+![automl_run_properties_2](starter_file/screenshots/automl_run_properties_2.png)
 
 ## Hyperparameter Tuning
 Here we are using a Logistic Regression model coming from the SKLearn framework to classify if a passenger would survive or not in the Titanic shipwreck.
@@ -178,13 +178,13 @@ The parameters used by this classifier are the following:
 * Max iterations = 1000
 
 #### HyperDrive Run Details widget
-![hyperdrive_run_details](screenshots/hyperdrive_run_details.png)
+![hyperdrive_run_details](starter_file/screenshots/hyperdrive_run_details.png)
 
 #### HyperDrive Best Model Run
-![hyperdrive_best_run_graph](screenshots/hyperdrive_best_run_graph.png)
+![hyperdrive_best_run_graph](starter_file/screenshots/hyperdrive_best_run_graph.png)
 
 #### HyperDrive Best Model Run Properties
-![hyperdrive_best_run_parameters](screenshots/hyperdrive_best_run_parameters.png)
+![hyperdrive_best_run_parameters](starter_file/screenshots/hyperdrive_best_run_parameters.png)
 
 ## Model Deployment
 The model created by the HyperDrive has been deployed in an endpoint that can be accessed using the following REST API:
@@ -242,7 +242,7 @@ print(resp.json())
 ```
 
 #### Service of HyperDrive model with "Active" deployment state
-![hyperdrive_service_active](screenshots/hyperdrive_service_active.png)
+![hyperdrive_service_active](starter_file/screenshots/hyperdrive_service_active.png)
 
 ## Future improvements
 
