@@ -19,7 +19,6 @@
   - [Future improvements](#future-improvements)
 
 # Capstone Project - Azure Machine Learning Engineer Nanodegree
-### [Clarisse Ribeiro](https://www.linkedin.com/in/clarisse-simoes-ribeiro/)
 
 
 In this project, we use the knowledge obtained in **Machine Learning Engineer with Microsoft Azure Nanodegree Program** to solve an interesting problem. 
